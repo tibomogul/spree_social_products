@@ -2,7 +2,11 @@
   <% content_for :head do %>
     <meta property="og:title" content="<%= @product.name %>" />
     <meta property="og:type" content="product" />
-    <meta property="og:url" content="<%= spree.product_url(@product) %>" />
+    <% if spree_current_user && !spree_current_user.sales_network_slug.blank? %>
+      <meta property="og:url" content="<%= spree.product_url(@product, :sponsor => spree_current_user.sales_network_slug) %>" />
+    <% else %>
+      <meta property="og:url" content="<%= spree.product_url(@product) %>" />
+    <% end %>
     <meta property="og:description" content="<%= @product.description %>" />
     <% @product.images.each do |img| %>
       <meta property="og:image" content="<%= absolute_image_url(img.attachment.url) %>" />

@@ -3,7 +3,11 @@ module Spree
     def pin_it_button(product)
       return if product.images.empty?
 
-      url = escape spree.product_url(product)
+      if spree_current_user && !spree_current_user.sales_network_slug.blank?
+        url = escape spree.product_url(product, :sponsor => spree_current_user.sales_network_slug)
+      else
+        url = escape spree.product_url(product)
+      end
       media = absolute_product_image(product.images.first)
       description = escape product.name
 

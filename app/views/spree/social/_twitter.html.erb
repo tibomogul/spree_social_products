@@ -5,7 +5,7 @@
   <% end %>
   <meta property="twitter:title" content="<%= @product.name %>" />
   <meta property="twitter:description" content="<%= @product.description %>" />
-  <meta property="twitter:image" content="<%= absolute_image_url(@product.images.first.attachment.url) %>" />
+  <meta property="twitter:image" content="<%= product_image(@product, itemprop: "image") %>" />
   <% unless @product.price.nil? %>
     <meta property="twitter:label1" content="<%= Spree.t(:price) %>" />
     <meta property="twitter:data1" content="<%= @product.price_in(current_currency).money %>" />
