@@ -1,3 +1,10 @@
+<% if spree_current_user && !spree_current_user.sales_network_slug.blank? %>
+<script type="text/javascript">
+  $(document).on('ready page:change', function() {
+    document.getElementsByClassName('fb-like')[0].dataset.ref = "<%= spree_current_user.sales_network_slug %>"
+  });
+</script>
+<% end %>
 <script type="text/javascript">
   var bindFacebookEvents, fb_events_bound, fb_root, initializeFacebookSDK, loadFacebookSDK, restoreFacebookRoot, saveFacebookRoot;
 
