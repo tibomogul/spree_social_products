@@ -2,11 +2,7 @@
   <% content_for :head do %>
     <meta property="og:title" content="<%= @product.name %>" />
     <meta property="og:type" content="product" />
-    <% if spree_current_user && !spree_current_user.sales_network_slug.blank? %>
-      <meta property="og:url" content="<%= spree.product_url(@product, :sponsor => spree_current_user.sales_network_slug) %>" />
-    <% else %>
-      <meta property="og:url" content="<%= spree.product_url(@product) %>" />
-    <% end %>
+    <meta property="og:url" content="<%= spree.product_url(@product) %>" />
     <meta property="og:description" content="<%= @product.description %>" />
     <% @product.images.each do |img| %>
       <meta property="og:image" content="<%= absolute_image_url(img.attachment.url) %>" />
@@ -16,6 +12,17 @@
 
   <div id="fb-root"></div>
 
+  <% if spree_current_user && !spree_current_user.sales_network_slug.blank? %>
+  <div
+    class="fb-like"
+    data-send="<%= Spree::Social::Config.preferred_facebook_send_button %>"
+    data-width="450"
+    data-show-faces="<%= Spree::Social::Config.preferred_facebook_show_faces %>"
+    data-layout="<%= Spree::Social::Config.preferred_facebook_layout %>"
+    data-colorscheme="<%= Spree::Social::Config.preferred_facebook_color_scheme %>"
+    data-action="<%= Spree::Social::Config.preferred_facebook_verb_to_display %>"
+    data-ref="<%= spree_current_user.sales_network_slug %>"></div>
+  <% else %>
   <div
     class="fb-like"
     data-send="<%= Spree::Social::Config.preferred_facebook_send_button %>"
@@ -24,4 +31,5 @@
     data-layout="<%= Spree::Social::Config.preferred_facebook_layout %>"
     data-colorscheme="<%= Spree::Social::Config.preferred_facebook_color_scheme %>"
     data-action="<%= Spree::Social::Config.preferred_facebook_verb_to_display %>"></div>
+  <% end %>
 <% end %>
