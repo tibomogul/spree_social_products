@@ -17,7 +17,7 @@
     <meta property="og:type" content="product" />
     <meta property="og:url" content="<%= sharing_url(@product) %>" />
     <meta property="og:description" content="<%= @product.description %>" />
-    <meta property="og:site_name" content="<%= current_store %>" />
+    <meta property="og:site_name" content="<%= current_store.name %>" />
     <% @product.images.each do |img| %>
       <meta property="og:image" content="<%= absolute_image_url(img.attachment.url(:original)) %>" />
     <% end %>
