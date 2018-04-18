@@ -26,6 +26,14 @@ module Spree
       request.protocol + request.host + url
     end
 
+    def sharing_url(product)
+      if respond_to? :product_share_url
+        product_share_url(product)
+      else
+        spree.product_url(product)
+      end
+    end
+
     private
 
     def escape(string)
